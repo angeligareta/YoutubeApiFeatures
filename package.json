@@ -1,6 +1,6 @@
 {
   "name": "@angeligareta/youtube-api-features",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple NPM Module for testing the features that the youtube api offer.",
   "main": "youtube-auth.js",
   "scripts": {
