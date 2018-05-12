@@ -1,26 +1,26 @@
 {
   "name": "@angeligareta/youtube-api-features",
   "version": "1.0.0",
-  "description": "Simple classifier for youtube comments that contains spam.",
+  "description": "Simple NPM Module for testing the features that the youtube api offer.",
   "main": "youtube-auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angeligareta/YouTubeCommentSpamClassifier.git"
+    "url": "git+https://github.com/angeligareta/YoutubeApiFeatures.git"
   },
   "keywords": [
     "youtube",
-    "spam",
-    "classify"
+    "api",
+    "features"
   ],
   "author": "Ángel Igareta <angeliton@hotmail.es> (https://github.com/angeligareta)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/angeligareta/YouTubeCommentSpamClassifier/issues"
+    "url": "https://github.com/angeligareta/YoutubeApiFeatures.git/issues"
   },
-  "homepage": "https://github.com/angeligareta/YouTubeCommentSpamClassifier#readme",
+  "homepage": "https://github.com/angeligareta/YoutubeApiFeatures.git#readme",
   "dependencies": {
     "google-auth-library": "^1.4.0",
     "googleapis": "^30.0.0"
