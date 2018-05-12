@@ -10,35 +10,34 @@ Simple NPM Module for testing the features that the youtube api has. The module 
 
 ## How to use
 First of all we have to follow the steps from: [Node.js QuickStart](https://developers.google.com/youtube/v3/quickstart/nodejs) and download our client_secret.json.
+Note: We have to pass a callback to make something with the result.
 
 Now, for using the features of the module, here we have an example of use:
-
 ```javascript
 let startFunctionOnMode = require('@angeligareta/youtube-api-features');
 
 // FUNCTIONS THAT CAN BE EXECUTED USING YOUTUBE API:
-// Given a video ID, it shows all the comments.
+// Take the comments from a video.
 const VIDEO_ID = "EhkxgMchJrA";
-startFunctionOnMode(0, {videoId : VIDEO_ID});
+startFunctionOnMode(0, {videoId : VIDEO_ID, callBack: (returnData) => console.log(returnData)});
 
-// Given a channel id, it shows the description.
 let CHANNEL_ID = "UChBkxLPlKqEjl7_g3pfIlqw";
-startFunctionOnMode(1, {id: CHANNEL_ID});
+startFunctionOnMode(1, {id: CHANNEL_ID, callBack: (returnData) => console.log(returnData)});
 
 // Given a channel name, it shows the description.
 let CHANNEL_NAME = "WorkingAndroid";
-startFunctionOnMode(1, {forUsername: CHANNEL_NAME});
+startFunctionOnMode(1, {forUsername: CHANNEL_NAME, callBack: (returnData) => console.log(returnData)});
 
 // Given a channel name, it shows it's last uploads.
 let CHANNEL_NAME_2 = "WorkingAndroid";
-startFunctionOnMode(2, {forUsername: CHANNEL_NAME_2});
+startFunctionOnMode(2, {forUsername: CHANNEL_NAME_2, callBack: (returnData) => console.log(returnData)});
 
 // Given a quest, look for videos in the youtube search.
 let quest = "Feeling The Net";
-startFunctionOnMode(3, {q: quest});
+startFunctionOnMode(3, {q: quest, callBack: (returnData) => console.log(returnData)});
 
 // Given a quest, look for channels in the youtube search.
-startFunctionOnMode(4, {q: quest});
+startFunctionOnMode(4, {q: quest, callBack: (returnData) => console.log(returnData)});
 ```
 
 ## Author
