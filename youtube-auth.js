@@ -186,21 +186,46 @@ function commentsList(auth, requestData) {
   let service = google.youtube('v3');
   let parameters = {'auth': auth, 'part': 'snippet,replies', videoId: requestData.videoId};
 
+  let totalComments = (typeof requestData.totalComments !== 'undefined') ? requestData.totalComments : 20;
+  readComments(auth, requestData.videoId, undefined, totalComments, "", requestData.callBack);
+}
+
+function readComments(auth, videoId, responseData, totalComments, returnData, callBack) {
+  let service = google.youtube('v3');
+  let parameters;
+  if (responseData !== undefined) {
+    parameters = {'auth': auth, 'part': 'snippet,replies', videoId: videoId, pageToken: responseData.nextPageToken};
+  }
+  else {
+    parameters = {'auth': auth, 'part': 'snippet,replies', videoId: videoId};
+  }
+
   service.commentThreads.list(parameters, function(err, response) {
     if (err) {
       console.log('Do you have internet? The API returned an error: ' + err);
       return;
     }
 
-    let responseData = response.data;
-    let returnData = "";
-    responseData.items.forEach(function(item) {
-      let topComment = item.snippet.topLevelComment;
-      let text = topComment.snippet.textOriginal;
-      returnData += text + "\n";
-    });
-    if (typeof requestData.callBack !== 'undefined') {
-      requestData.callBack(returnData);
+    let nextResponseData = response.data;
+    let currentTotalComments = totalComments;
+    let currentReturnData = returnData;
+
+    if (nextResponseData.items.length > 0) {
+      nextResponseData.items.forEach(function(item) {
+        let topComment = item.snippet.topLevelComment;
+        let text = topComment.snippet.textOriginal;
+        currentReturnData += text + "\n";
+        currentTotalComments --;
+      });
+      if (currentTotalComments > 0) {
+        readComments(auth, videoId, nextResponseData, currentTotalComments, currentReturnData, callBack);
+      }
+      else {
+        callBack(currentReturnData);
+      }
+    }
+    else {
+      callBack(currentReturnData);
     }
   });
 }
