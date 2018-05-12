@@ -127,7 +127,7 @@ function createResource(properties) {
   return resource;
 }
 
-// Start is a method that receives a mode depending on the wanted output and the necessart parameters for getting that output.
+// Start is a method that receives a mode depending on the wanted output and the necessary parameters for getting that output.
 function startFunctionOnMode(mode, authorizeParameters) {
 
   // Load client secrets from a local file and execute a function depending on the function argument.
@@ -193,12 +193,15 @@ function commentsList(auth, requestData) {
     }
 
     let responseData = response.data;
-    console.log("********* LIST OF COMMENTS OF VIDEO: " + requestData.videoId + " *********");
+    let returnData = "";
     responseData.items.forEach(function(item) {
       let topComment = item.snippet.topLevelComment;
       let text = topComment.snippet.textOriginal;
-      console.log('- ' + text + "\n");
+      returnData += text + "\n";
     });
+    if (typeof requestData.callBack !== 'undefined') {
+      requestData.callBack(returnData);
+    }
   });
 }
 
@@ -223,13 +226,16 @@ function channelInfo(auth, requestData) {
     let channelStatistics = response.data.items[0].statistics;
     let channelPlaylists = response.data.items[0].contentDetails.relatedPlaylists;
 
-    console.log("********* STATISTICS OF CHANNEL: " + channelDetails.title + " *********");
-    console.log("\t- Creation time: " + channelDetails.publishedAt);
-    console.log("\t- Number of total views: " + channelStatistics.viewCount);
-    console.log("\t- Number of subscribers: " + channelStatistics.subscriberCount);
-    console.log("\t- Number of videos: " + channelStatistics.videoCount);
-    console.log("\t- Upload playlist: " + channelPlaylists.uploads);
-    console.log("\t-Description of the channel: " + channelDetails.description);
+    let returnData = "";
+    returnData += "\t- Creation time: " + channelDetails.publishedAt + "\n";
+    returnData += "\t- Number of total views: " + channelStatistics.viewCount + "\n";
+    returnData += "\t- Number of subscribers: " + channelStatistics.subscriberCount + "\n";
+    returnData += "\t- Number of videos: " + channelStatistics.videoCount + "\n";
+    returnData += "\t- Upload playlist: " + channelPlaylists.uploads + "\n";
+    returnData += "\t-Description of the channel: " + channelDetails.description + "\n";
+    if (typeof requestData.callBack !== 'undefined') {
+      requestData.callBack(returnData);
+    }
   });
 }
 
@@ -254,12 +260,15 @@ function videoList(auth, requestData) {
         return;
       }
 
-      console.log("********* LAST VIDEOS UPLOADED BY: " + requestData.forUsername + " *********");
+      let returnData = "";
       let videoList = response.data.items;
       videoList.forEach(function (video, i) {
         let videoDetails = video.snippet;
-        console.log("#" + (i + 1) + ": " + videoDetails.title);
+        returnData += "#" + (i + 1) + ": " + videoDetails.title + "\n";
       });
+      if (typeof requestData.callBack !== 'undefined') {
+        requestData.callBack(returnData);
+      }
     });
   });
 }
@@ -277,11 +286,14 @@ function searchVideo(auth, requestData) {
     }
 
     let videoList = response.data.items;
-    console.log("********* VIDEO RESULTS FOR QUEST: " + requestData.q + " *********");
+    let returnData = "";
     videoList.forEach(function (video, i) {
       let videoDetails = video.snippet;
-      console.log("#" + (i + 1) + ": " + videoDetails.title);
+      returnData += "#" + (i + 1) + ": " + videoDetails.title + "\n";
     });
+    if (typeof requestData.callBack !== 'undefined') {
+      requestData.callBack(returnData);
+    }
   });
 }
 
@@ -298,11 +310,14 @@ function searchChannel(auth, requestData) {
     }
 
     let videoList = response.data.items;
-    console.log("********* CHANNEL RESULTS FOR QUEST: " + requestData.q + " *********");
+    let returnData = "";
     videoList.forEach(function (video, i) {
       let videoDetails = video.snippet;
-      console.log("#" + (i + 1) + ": " + videoDetails.title);
+      returnData += "#" + (i + 1) + ": " + videoDetails.title + "\n";
     });
+    if (typeof requestData.callBack !== 'undefined') {
+      requestData.callBack(returnData);
+    }
   });
 }
 
