@@ -1,0 +1,29 @@
+{
+  "name": "@angeligareta/youtubecommentspamclassifier",
+  "version": "1.0.0",
+  "description": "Simple classifier for youtube comments that contains spam.",
+  "main": "youtube_comment_api.js",
+  "scripts": {
+"start": "node youtube_comment_api.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angeligareta/YouTubeCommentSpamClassifier.git"
+  },
+  "keywords": [
+    "youtube",
+    "spam",
+    "classify"
+  ],
+  "author": "Ángel Igareta <angeliton@hotmail.es> (https://github.com/angeligareta)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angeligareta/YouTubeCommentSpamClassifier/issues"
+  },
+  "homepage": "https://github.com/angeligareta/YouTubeCommentSpamClassifier#readme",
+  "dependencies": {
+    "google-auth-library": "^1.4.0",
+    "googleapis": "^30.0.0"
+  }
+}
