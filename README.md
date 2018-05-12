@@ -1,4 +1,5 @@
 # YoutubeApiFeatures
+[![npm version](https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features.svg)](https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features)
 
 ## Description
 Simple NPM Module for testing the features that the youtube api has. The module has the following features.
