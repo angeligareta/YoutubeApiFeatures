@@ -129,55 +129,58 @@ function createResource(properties) {
 
 // Start is a method that receives a mode depending on the wanted output and the necessary parameters for getting that output.
 function startFunctionOnMode(mode, authorizeParameters) {
+  return new Promise(function(resolve, reject) {
+    authorizeParameters.callBack = resolve;
 
-  // Load client secrets from a local file and execute a function depending on the function argument.
-  fs.readFile('client_secret.json', function processClientSecrets(err, content) {
-    if (err) {
-      console.log('Error loading client secret file: ' + err);
-      return;
-    }
-    switch (mode) {
-      case 0: // Given a video ID, it shows all the comments.
+    // Load client secrets from a local file and execute a function depending on the function argument.
+    fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+      if (err) {
+        console.log('Error loading client secret file: ' + err);
+        return;
+      }
+      switch (mode) {
+        case 0: // Given a video ID, it shows all the comments.
         if (typeof authorizeParameters.videoId === 'undefined') {
           throw new TypeError('Invalid argument for show youtube comments. Missing videoId attribute.');
         }
         else {
           authorize(JSON.parse(content), authorizeParameters, commentsList);
         }
-      break;
-      case 1: // Given a channel id or name, it shows the description.
+        break;
+        case 1: // Given a channel id or name, it shows the description.
         if ((typeof authorizeParameters.id === 'undefined') && (typeof authorizeParameters.forUsername === 'undefined')) {
           throw new TypeError('Invalid argument for show youtube videos. Missing id or forUsername attribute.');
         }
         else {
           authorize(JSON.parse(content), authorizeParameters, channelInfo);
         }
-      break;
-      case 2: // Given a channel name, it shows it's last uploads.
+        break;
+        case 2: // Given a channel name, it shows it's last uploads.
         if (typeof authorizeParameters.forUsername === 'undefined') {
           throw new TypeError('Invalid argument for show youtube videos. Missing forUsername attribute.');
         }
         else {
           authorize(JSON.parse(content), authorizeParameters, videoList);
         }
-      break;
-      case 3: // Given a quest, it looks for videos in youtube search.
+        break;
+        case 3: // Given a quest, it looks for videos in youtube search.
         if (typeof authorizeParameters.q === 'undefined') {
           throw new TypeError('Invalid argument for show youtube videos. Missing q attribute.');
         }
         else {
           authorize(JSON.parse(content), authorizeParameters, searchVideo);
         }
-      break;
-      case 4: // Given a quest, it looks for channels in youtube search.
+        break;
+        case 4: // Given a quest, it looks for channels in youtube search.
         if (typeof authorizeParameters.q === 'undefined') {
           throw new TypeError('Invalid argument for show youtube videos. Missing q attribute.');
         }
         else {
           authorize(JSON.parse(content), authorizeParameters, searchChannel);
         }
-      break;
-    }
+        break;
+      }
+    });
   });
 }
 
