@@ -366,14 +366,25 @@ function searchVideo(auth, requestData) {
       return;
     }
 
+    let tableHeader = [colors.red('INDEX'), colors.blue('DATE'), colors.green('VIDEO TITLE'), colors.yellow('VIDEO DESCRIPTION')];
+    let returnData = [tableHeader];
+
     let videoList = response.data.items;
-    let returnData = "";
     videoList.forEach(function (video, i) {
       let videoDetails = video.snippet;
-      returnData += "#" + (i + 1) + ": " + videoDetails.title + "\n";
+      returnData.push(["#" + (i + 1), videoDetails.publishedAt, videoDetails.title.replace(/\n/g, ''), videoDetails.description.replace(/\n/g, '')]);
     });
+
     if (typeof requestData.callBack !== 'undefined') {
-      requestData.callBack(returnData);
+      let tableConfig = {
+        border: getBorderCharacters(`norc`),
+        columns: {
+          2: { width: 50 },
+          3: { width: 50 }
+        }
+      };
+      let resultingTable = table(returnData, tableConfig);
+      requestData.callBack(resultingTable);
     }
   });
 }
@@ -390,14 +401,25 @@ function searchChannel(auth, requestData) {
       return;
     }
 
+    let tableHeader = [colors.red('INDEX'), colors.blue('DATE OF CREATION'), colors.green('CHANNEL TITLE'), colors.yellow('CHANNEL DESCRIPTION')];
+    let returnData = [tableHeader];
+
     let videoList = response.data.items;
-    let returnData = "";
     videoList.forEach(function (video, i) {
       let videoDetails = video.snippet;
-      returnData += "#" + (i + 1) + ": " + videoDetails.title + "\n";
+      returnData.push(["#" + (i + 1), videoDetails.publishedAt, videoDetails.title.replace(/\n/g, ''), videoDetails.description.replace(/\n/g, '')]);
     });
+
     if (typeof requestData.callBack !== 'undefined') {
-      requestData.callBack(returnData);
+      let tableConfig = {
+        border: getBorderCharacters(`norc`),
+        columns: {
+          2: { width: 20 },
+          3: { width: 100 }
+        }
+      };
+      let resultingTable = table(returnData, tableConfig);
+      requestData.callBack(resultingTable);
     }
   });
 }

@@ -11,12 +11,12 @@ let startFunctionOnMode = require('./youtube-auth.js');
 // startFunctionOnMode(1, {forUsername: CHANNEL_NAME}).then((returnData) => console.log(returnData));
 //
 // Given a channel name, it shows it's last uploads.
-let CHANNEL_NAME_2 = "WorkingAndroid";
-startFunctionOnMode(2, {forUsername: CHANNEL_NAME_2}).then((returnData) => console.log(returnData));
+// let CHANNEL_NAME_2 = "WorkingAndroid";
+// startFunctionOnMode(2, {forUsername: CHANNEL_NAME_2}).then((returnData) => console.log(returnData));
 //
 // // Given a quest, look for videos in the youtube search.
-// let quest = "Feeling The Net";
+let quest = "Feeling The Net";
 // startFunctionOnMode(3, {q: quest}).then((returnData) => console.log(returnData));
-//
-// // Given a quest, look for channels in the youtube search.
-// startFunctionOnMode(4, {q: quest}).then((returnData) => console.log(returnData));
+
+// Given a quest, look for channels in the youtube search.
+startFunctionOnMode(4, {q: quest}).then((returnData) => console.log(returnData));
