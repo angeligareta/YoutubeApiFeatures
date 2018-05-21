@@ -192,7 +192,7 @@ function commentsList(auth, requestData) {
   let parameters = {'auth': auth, 'part': 'snippet,replies', videoId: requestData.videoId};
 
   let totalComments = (typeof requestData.totalComments !== 'undefined') ? requestData.totalComments : 20;
-  let tableHeader = [colors.red('NUMBER'), colors.green('DATE'), colors.blue('AUTHOR'), colors.yellow('COMMENTS')];
+  let tableHeader = [colors.red('INDEX'), colors.green('DATE OF PUBLISH'), colors.blue('AUTHOR'), colors.yellow('COMMENTS')];
   readComments(auth, requestData.videoId, undefined, totalComments, [tableHeader], requestData.callBack);
 }
 
@@ -219,7 +219,7 @@ function readComments(auth, videoId, responseData, totalComments, returnData, ca
     if (nextResponseData.items.length > 0) {
       nextResponseData.items.forEach(function(item) {
         let topComment = item.snippet.topLevelComment;
-        let index = currentReturnData.length;
+        let index = "#" + currentReturnData.length;
         let date = topComment.snippet.publishedAt;
         let author = topComment.snippet.authorDisplayName;
         let text = topComment.snippet.textOriginal;
@@ -329,7 +329,7 @@ function videoList(auth, requestData) {
         return;
       }
 
-      let tableHeader = [colors.red('INDEX'), colors.blue('DATE'), colors.green('VIDEO TITLE'), colors.yellow('VIDEO DESCRIPTION')];
+      let tableHeader = [colors.red('INDEX'), colors.blue('DATE OF PUBLISH'), colors.green('VIDEO TITLE'), colors.yellow('VIDEO DESCRIPTION')];
       let returnData = [tableHeader];
 
       let videoList = response.data.items;
@@ -366,7 +366,7 @@ function searchVideo(auth, requestData) {
       return;
     }
 
-    let tableHeader = [colors.red('INDEX'), colors.blue('DATE'), colors.green('VIDEO TITLE'), colors.yellow('VIDEO DESCRIPTION')];
+    let tableHeader = [colors.red('INDEX'), colors.blue('DATE OF PUBLISH'), colors.green('VIDEO TITLE'), colors.yellow('VIDEO DESCRIPTION')];
     let returnData = [tableHeader];
 
     let videoList = response.data.items;
