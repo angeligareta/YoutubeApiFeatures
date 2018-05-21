@@ -1,11 +1,11 @@
 let startFunctionOnMode = require('./youtube-auth.js');
 
-const VIDEO_ID = "6O0vS4b0n4k";
-startFunctionOnMode(0, {videoId : VIDEO_ID}).then((returnData) => console.log(returnData));
+// const VIDEO_ID = "6O0vS4b0n4k";
+// startFunctionOnMode(0, {videoId : VIDEO_ID}).then((returnData) => console.log(returnData));
 
-// let CHANNEL_ID = "UChBkxLPlKqEjl7_g3pfIlqw";
-// startFunctionOnMode(1, {id: CHANNEL_ID}).then((returnData) => console.log(returnData));
-//
+let CHANNEL_ID = "UChBkxLPlKqEjl7_g3pfIlqw";
+startFunctionOnMode(1, {id: CHANNEL_ID}).then((returnData) => console.log(returnData));
+
 // // Given a channel name, it shows the description.
 // let CHANNEL_NAME = "WorkingAndroid";
 // startFunctionOnMode(1, {forUsername: CHANNEL_NAME}).then((returnData) => console.log(returnData));

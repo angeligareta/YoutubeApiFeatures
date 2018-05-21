@@ -287,15 +287,23 @@ function channelInfo(auth, requestData) {
     let channelStatistics = response.data.items[0].statistics;
     let channelPlaylists = response.data.items[0].contentDetails.relatedPlaylists;
 
-    let returnData = "";
-    returnData += "\t- Creation time: " + channelDetails.publishedAt + "\n";
-    returnData += "\t- Number of total views: " + channelStatistics.viewCount + "\n";
-    returnData += "\t- Number of subscribers: " + channelStatistics.subscriberCount + "\n";
-    returnData += "\t- Number of videos: " + channelStatistics.videoCount + "\n";
-    returnData += "\t- Upload playlist: " + channelPlaylists.uploads + "\n";
-    returnData += "\t-Description of the channel: " + channelDetails.description + "\n";
+    let tableHeader = [colors.red('CHANNEL STATISTIC'), colors.green('INFORMATION')];
+    let returnData = [tableHeader];
+    returnData.push(["Creation time", channelDetails.publishedAt]);
+    returnData.push(["Number of total views", channelStatistics.viewCount]);
+    returnData.push(["Number of subscribers", channelStatistics.subscriberCount]);
+    returnData.push(["Number of videos", channelStatistics.videoCount]);
+    returnData.push(["Upload playlist", channelPlaylists.uploads]);
+    returnData.push(["Description of the channel", channelDetails.description.replace(/\n/g, '')]);
     if (typeof requestData.callBack !== 'undefined') {
-      requestData.callBack(returnData);
+      let tableConfig = {
+        border: getBorderCharacters(`norc`),
+        columns: {
+          1: { width: 100 }
+        }
+      };
+      let resultingTable = table(returnData, tableConfig);
+      requestData.callBack(resultingTable);
     }
   });
 }
