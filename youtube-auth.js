@@ -3,6 +3,8 @@ let readline = require('readline');
 let { google } = require('googleapis');
 let { OAuth2Client } = require('google-auth-library');
 
+const {table, getBorderCharacters} = require('table');
+const colors = require('colors');
 const inspect = require("util").inspect;
 let ins = (x) => inspect(x, { depth: null });
 
@@ -190,7 +192,8 @@ function commentsList(auth, requestData) {
   let parameters = {'auth': auth, 'part': 'snippet,replies', videoId: requestData.videoId};
 
   let totalComments = (typeof requestData.totalComments !== 'undefined') ? requestData.totalComments : 20;
-  readComments(auth, requestData.videoId, undefined, totalComments, "", requestData.callBack);
+  let tableHeader = [colors.red('NUMBER'), colors.green('DATE'), colors.blue('AUTHOR'), colors.yellow('COMMENTS')];
+  readComments(auth, requestData.videoId, undefined, totalComments, [tableHeader], requestData.callBack);
 }
 
 function readComments(auth, videoId, responseData, totalComments, returnData, callBack) {
@@ -216,19 +219,49 @@ function readComments(auth, videoId, responseData, totalComments, returnData, ca
     if (nextResponseData.items.length > 0) {
       nextResponseData.items.forEach(function(item) {
         let topComment = item.snippet.topLevelComment;
+        let index = currentReturnData.length;
+        let date = topComment.snippet.publishedAt;
+        let author = topComment.snippet.authorDisplayName;
         let text = topComment.snippet.textOriginal;
-        currentReturnData += text + "\n";
+        text = text.replace(/\n/g, ''); // Remove control characters for table module.
+
+        let row = [index, date, author, text];
+
+        let textPresent = false;
+        currentReturnData.forEach(([index, date, author, comment]) => {
+          if (comment == text) {
+            textPresent = true;
+          }
+        });
+
+        if (!textPresent) {
+          currentReturnData.push(row);
+        }
         currentTotalComments --;
       });
       if (currentTotalComments > 0) {
         readComments(auth, videoId, nextResponseData, currentTotalComments, currentReturnData, callBack);
       }
       else {
-        callBack(currentReturnData);
+        let tableConfig = {
+          border: getBorderCharacters(`norc`),
+          columns: {
+            3: { width: 100 }
+          }
+        };
+        let resultingTable = table(currentReturnData, tableConfig);
+        callBack(resultingTable);
       }
     }
     else {
-      callBack(currentReturnData);
+      let tableConfig = {
+        border: getBorderCharacters(`norc`),
+        columns: {
+          3: { width: 100 }
+        }
+      };
+      let resultingTable = table(currentReturnData, tableConfig);
+      callBack(resultingTable);
     }
   });
 }
