@@ -329,14 +329,26 @@ function videoList(auth, requestData) {
         return;
       }
 
-      let returnData = "";
+      let tableHeader = [colors.red('INDEX'), colors.blue('DATE'), colors.green('VIDEO TITLE'), colors.yellow('VIDEO DESCRIPTION')];
+      let returnData = [tableHeader];
+
       let videoList = response.data.items;
       videoList.forEach(function (video, i) {
         let videoDetails = video.snippet;
-        returnData += "#" + (i + 1) + ": " + videoDetails.title + "\n";
+        let descriptionSummary = videoDetails.description.replace(/\n/g, '').substring(0, 100);
+        returnData.push(["#" + (i + 1), videoDetails.publishedAt, videoDetails.title.replace(/\n/g, ''), descriptionSummary]);
       });
+
       if (typeof requestData.callBack !== 'undefined') {
-        requestData.callBack(returnData);
+        let tableConfig = {
+          border: getBorderCharacters(`norc`),
+          columns: {
+            2: { width: 50 },
+            3: { width: 50 }
+          }
+        };
+        let resultingTable = table(returnData, tableConfig);
+        requestData.callBack(resultingTable);
       }
     });
   });
