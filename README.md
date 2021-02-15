@@ -3,7 +3,7 @@
 
 <p align="center">
   <img alt="ULL" src="https://img.shields.io/badge/University-La%20Laguna-%2354048c?style=flat-square" />  
-  <img alt="License" src="https://img.shields.io/github/license/angeligareta/cheaper-travelling?style=flat-square" />
+  <img alt="License" src="https://img.shields.io/github/license/angeligareta/youtube-api-features?style=flat-square" />
   <a href="https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features"><img src="https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features.svg" alt="npm version" height="18"></a>
 </p>
 
