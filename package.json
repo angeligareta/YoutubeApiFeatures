@@ -2,7 +2,7 @@
   "name": "@angeligareta/youtube-api-features",
   "version": "1.2.0",
   "description": "Simple NPM Module for testing the features that the youtube api offer.",
-  "main": "youtube-auth.js",
+  "main": "src/youtube-auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
