@@ -1,5 +1,11 @@
-# YoutubeApiFeatures
-[![npm version](https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features.svg)](https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features)
+<h1 align="center">YouTube API Features</h1>
+<h4 align="center">Simple NPM Module for testing the YouTube API features</h4>
+
+<p align="center">
+  <img alt="ULL" src="https://img.shields.io/badge/University-La%20Laguna-%2354048c?style=flat-square" />  
+  <img alt="License" src="https://img.shields.io/github/license/angeligareta/cheaper-travelling?style=flat-square" />
+  <a href="https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features"><img src="https://badge.fury.io/js/%40angeligareta%2Fyoutube-api-features.svg" alt="npm version" height="18"></a>
+</p>
 
 ## Description
 Simple NPM Module for testing the features that the youtube api has. The module has the following features.
@@ -40,4 +46,11 @@ startFunctionOnMode(4, {q: quest}).then((returnData) => console.log(returnData))
 ```
 
 ## Author
-[Ángel Igareta](https://github.com/angeligareta)
+<p align="center">
+  <a href="https://angeligareta.com" alt="Angel Igareta" target="_blank">
+    <img
+      style="max-width: 420px"
+      src="https://lh3.googleusercontent.com/d/1a8GtvbvSP-kPeUBbFue3xuYZIMffFvFW=w600"
+    />
+  </a>
+</p>
